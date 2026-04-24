@@ -46,6 +46,76 @@ font-weight: 400;
 letter-spacing: -0.02em;
 }
 /* =========================================================
+NAVBAR WITH BURGER MENU
+========================================================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #222;
+  color: white;
+  padding: 15px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* NAV LINKS */
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+/* BURGER MENU */
+.burger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.burger span {
+  height: 3px;
+  width: 25px;
+  background: white;
+  margin: 4px 0;
+  display: block;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .burger {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #222;
+    flex-direction: column;
+    width: 200px;
+    display: none;
+    padding: 20px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+}
+
+/* =========================================================
 SECTION 1: HERO
 ========================================================= */
 .hero-homecare {
@@ -2320,98 +2390,6 @@ animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 animation: heroFloatSoft 7s ease-in-out infinite;
 }
 /* =========================================================
-BURGER MENU STYLES
-========================================================= */
-.hero-burger-menu {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  background: rgba(252, 250, 247, 0.82);
-  border: 1px solid rgba(216, 209, 199, 0.92);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 180ms ease, border-color 180ms ease;
-  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-}
-
-.hero-burger-menu:hover {
-  background: rgba(252, 250, 247, 0.96);
-  border-color: rgba(143, 160, 140, 0.24);
-}
-
-.burger-line {
-  display: block;
-  width: 18px;
-  height: 2px;
-  background: var(--hc-text);
-  border-radius: 1px;
-  transition: transform 180ms ease, opacity 180ms ease;
-}
-
-.burger-line:nth-child(1) {
-  margin-bottom: 4px;
-}
-
-.burger-line:nth-child(3) {
-  margin-top: 4px;
-}
-
-.hero-burger-menu.active .burger-line:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.hero-burger-menu.active .burger-line:nth-child(2) {
-  opacity: 0;
-}
-
-.hero-burger-menu.active .burger-line:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
-
-/* Mobile navigation menu */
-#mobileNav {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 280px;
-  height: 100vh;
-  background: rgba(252, 250, 247, 0.96);
-  backdrop-filter: blur(16px);
-  border-left: 1px solid rgba(216, 209, 199, 0.92);
-  box-shadow: -18px 0 40px rgba(32, 28, 23, 0.14);
-  padding: 80px 28px 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  z-index: 9998;
-  transition: right 300ms ease;
-}
-
-#mobileNav.active {
-  right: 0;
-}
-
-#mobileNav a {
-  color: var(--hc-text);
-  font-size: 16px;
-  font-weight: 600;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(143, 160, 140, 0.12);
-  transition: color 180ms ease;
-}
-
-#mobileNav a:hover {
-  color: var(--hc-accent-dark);
-}
-
-#mobileNav a.is-active {
-  color: var(--hc-text);
-  border-bottom-color: var(--hc-accent);
-}
-
-/* =========================================================
 RESPONSIVE RULES
 ========================================================= */
 @media (max-width: 1080px) {
@@ -2435,22 +2413,6 @@ display: none;
 }
 }
 @media (max-width: 720px) {
-.hero-burger-menu {
-  display: flex;
-}
-
-.hero-nav {
-  justify-content: space-between;
-}
-
-.hero-nav-links {
-  display: none;
-}
-
-#mobileNav {
-  display: flex;
-}
-
 .hero-shell {
 padding: 14px 14px 28px;
 }
@@ -2520,33 +2482,26 @@ gtag('config', 'G-2M6V79H761');
 
 <body class="">
 
-  <div class="hero-nav-wrap">
-    <nav class="hero-nav hero-fade-up" style="animation-delay: 0.05s;">
-      <a href="#hero" class="hero-brand">
-        <span class="hero-brand-mark">FT</span>
-        <span class="hero-brand-text">
-        <span class="hero-brand-name">The Final Touch</span>
-        <span class="hero-brand-sub">Servicing Company</span>
-        </span>
-      </a>
+  <!-- Simple Navbar with Burger Menu -->
+  <header class="navbar">
+    <div class="logo">The Final Touch</div>
 
-      <div class="hero-nav-links" id="mobileNav">
-        <a href="#hero" class="is-active">Home</a>
-        <a href="#services">Services</a>
-        <a href="#process">Process</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#quote">Quote</a>
-      </div>
+    <!-- Burger Button -->
+    <div class="burger" id="burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
 
-      <button class="hero-burger-menu" id="burgerMenu" aria-label="Toggle navigation menu">
-        <span class="burger-line"></span>
-        <span class="burger-line"></span>
-        <span class="burger-line"></span>
-      </button>
-
-      <a href="#quote" class="hero-nav-cta">Get a Quote</a>
+    <!-- Navigation Links -->
+    <nav id="nav-links" class="nav-links">
+      <a href="#hero">Home</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#quote">Quote</a>
     </nav>
-  </div>
+  </header>
 
   <!-- SECTION 1: HERO -->
   <section id="hero" class="hero-homecare">
@@ -3720,5 +3675,15 @@ gtag('config', 'G-2M6V79H761');
 
 
 
+
+    <script>
+      // Simple Burger Menu Toggle
+      const burger = document.getElementById("burger");
+      const navLinks = document.getElementById("nav-links");
+
+      burger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+    </script>
 
 </body></html>
